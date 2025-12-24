@@ -9,9 +9,7 @@
         "default_icon": "icons/128.png"
     },
     "background": {
-        "scripts": [
-            "scripts/service.js"
-        ],
+        "service_worker": "scripts/service.js",
         "type": "module"
     },
     "icons": {
@@ -34,11 +32,6 @@
             ]
         }
     ],
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "JeffreyWangDev@onshape-wakatime"
-        }
-    },
     "web_accessible_resources": [
         {
             "resources": [

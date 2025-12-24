@@ -37,17 +37,27 @@ class WakaCore {
             return fromHeading.replace("\n", "").trim();
         }
     }
+    getEntityName() {
+        console.log("Getting entity name");
+        // Extract the file name from the tab title (format: "project name | file name")
+        let tabName = document.title;
+        if (tabName.includes("|")) {
+            return tabName.split("|")[1].trim();
+        }
+        // Fallback to the full title if no pipe found
+        return tabName.trim();
+    }
     buildHeartbeat(url) {
         return {
             branch: "<<LAST_BRANCH>>",
             category: "Designing",
-            entity: url,
+            entity: this.getEntityName() ?? "<<LAST_ENTITY>>",
             id: uuidv4(),
             language: "Onshape",
             plugin: getUserAgent(),
             project: this.getProjectName() ?? "<<LAST_PROJECT>>",
             time: this.getCurrentTime(),
-            type: "domain",
+            type: "file",
         };
     }
 
