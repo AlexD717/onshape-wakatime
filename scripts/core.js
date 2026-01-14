@@ -47,8 +47,8 @@ class WakaCore {
         // Fallback to the full title if no pipe found
         return tabName.trim();
     }
-    buildHeartbeat(url) {
-        return {
+    buildHeartbeat(url, hostname = null) {
+        const heartbeat = {
             branch: "<<LAST_BRANCH>>",
             category: "Designing",
             entity: this.getEntityName() ?? "<<LAST_ENTITY>>",
@@ -59,6 +59,10 @@ class WakaCore {
             time: this.getCurrentTime(),
             type: "file",
         };
+        if (hostname && hostname.trim() !== "") {
+            heartbeat.machine_name = hostname.trim();
+        }
+        return heartbeat;
     }
 
     getCurrentTime() {

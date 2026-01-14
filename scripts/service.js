@@ -16,7 +16,8 @@ chrome.runtime.onInstalled.addListener(({ reason }) => {
       heartbeats: [],
       enabled: true,
       msg: "",
-      api_url: "https://hackatime.hackclub.com/api/hackatime/v1"
+      api_url: "https://hackatime.hackclub.com/api/hackatime/v1",
+      hostname: ""
     });
   }
 });

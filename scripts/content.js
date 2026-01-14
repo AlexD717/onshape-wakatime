@@ -128,20 +128,23 @@ function handleClick() {
         return
     }
     let url = window.location.href;
-    let heatbeat = core.buildHeartbeat(url);
-    // console.log(heatbeat);
-    try{
-        chrome.storage.local.set({ currentProject: core.getProjectName() });
-        chrome.storage.local.get("heartbeats").then((item) => {
-            if (!item.heartbeats) {
-                item.heartbeats = []
-            }
-            item.heartbeats.push(heatbeat)
-            chrome.storage.local.set({ heartbeats: item.heartbeats })
-          });
-    }catch(e){
-        popup_error("An error occurred. Usually this is because you have not refreshed your page after installing the extension. Please refresh the page and try again.");
-    }
+    
+    chrome.storage.local.get("hostname").then((item) => {
+        let heatbeat = core.buildHeartbeat(url, item.hostname);
+        // console.log(heatbeat);
+        try{
+            chrome.storage.local.set({ currentProject: core.getProjectName() });
+            chrome.storage.local.get("heartbeats").then((item) => {
+                if (!item.heartbeats) {
+                    item.heartbeats = []
+                }
+                item.heartbeats.push(heatbeat)
+                chrome.storage.local.set({ heartbeats: item.heartbeats })
+              });
+        }catch(e){
+            popup_error("An error occurred. Usually this is because you have not refreshed your page after installing the extension. Please refresh the page and try again.");
+        }
+    });
 
 }
 

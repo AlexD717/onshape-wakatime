@@ -36,6 +36,12 @@ chrome.storage.local.get().then((items) => {
         chrome.storage.local.set({ api_url: api_url.value });
     });
 
+    let hostname = document.getElementById("hostname");
+    hostname.value = items.hostname || "";
+    hostname.addEventListener("change", function () {
+        chrome.storage.local.set({ hostname: hostname.value });
+    });
+
     let sendHeartbeat = document.getElementById("sendHeartbeat");
     sendHeartbeat.addEventListener("click", function () {
         const originalText = sendHeartbeat.textContent;
